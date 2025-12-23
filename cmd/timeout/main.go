@@ -14,6 +14,10 @@ import (
 func main() {
 	var timeoutFlag time.Duration
 	flag.DurationVar(&timeoutFlag, "timeout", 10*time.Second, "timeout for the command")
+	flag.Usage = func() {
+		fmt.Fprintf(flag.CommandLine.Output(), "Usage of %s: [flags] <command> [args...]\n", os.Args[0])
+		flag.PrintDefaults()
+	}
 	flag.Parse()
 
 	args := flag.Args()
